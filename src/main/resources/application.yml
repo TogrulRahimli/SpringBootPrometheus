@@ -1,0 +1,42 @@
+server:
+  port: 8383
+
+management:
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include: ["health", "info", "env" , "metrics" , "prometheus"]
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    metrics:
+      export:
+        # Prometheus is the default metrics backend
+        prometheus:
+          enabled: true
+          step: 60
+      binders:
+        jvm:
+          enabled: true
+        processor:
+          enabled: true
+        uptime:
+          enabled: true
+        logback:
+          enabled: true
+        files:
+          enabled: true
+        integration:
+          enabled: true
+      distribution:
+        percentiles-histogram:
+          all: true
+        percentiles:
+          all: 0, 0.5, 0.75, 0.95, 0.99, 1.0
+      web:
+        server:
+          auto-time-requests: true
+    prometheus:
+      enabled: true
